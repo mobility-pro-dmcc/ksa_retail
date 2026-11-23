@@ -1,0 +1,121 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+}
+
+body {
+	background: var(--canvas);
+	color: var(--ink);
+	font: var(--text-m) / var(--leading) var(--font-body);
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select {
+	font: inherit;
+	color: inherit;
+}
+
+button {
+	cursor: pointer;
+}
+
+button:disabled {
+	cursor: not-allowed;
+}
+
+h1,
+h2,
+p,
+ul,
+ol,
+dl,
+dd {
+	margin: 0;
+	padding: 0;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+img {
+	max-width: 100%;
+}
+
+:focus-visible {
+	outline: 2px solid var(--focus);
+	outline-offset: 2px;
+}
+
+/* Codes, sizes, amounts: tabular, left-to-right even inside Arabic text */
+.data {
+	font-family: var(--font-data);
+	font-variant-numeric: tabular-nums;
+	direction: ltr;
+	unicode-bidi: isolate;
+	letter-spacing: -0.01em;
+}
+
+/* Identifiers that may be Arabic (e.g. customer IDs named after the customer): mono, natural direction */
+.code {
+	font-family: var(--font-data);
+	unicode-bidi: isolate;
+}
+
+.visually-hidden {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+
+.icon {
+	flex: none;
+}
+
+[dir="rtl"] .icon--directional {
+	transform: scaleX(-1);
+}
+
+.icon--forward {
+	transform: rotate(-90deg);
+}
+
+[dir="rtl"] .icon--forward {
+	transform: rotate(90deg);
+}
+
+.money {
+	display: inline-flex;
+	align-items: baseline;
+	gap: 0.3em;
+	white-space: nowrap;
+}
+
+.money__unit {
+	font-size: 0.78em;
+	color: var(--ink-faint);
+	font-family: var(--font-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+	}
+}

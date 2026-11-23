@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"target": "ES2021",
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"lib": ["ES2022", "DOM", "DOM.Iterable"],
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"isolatedModules": true,
+		"skipLibCheck": true,
+		"noEmit": true,
+		"baseUrl": ".",
+		"paths": {
+			"vue": ["../../../../frappe/node_modules/vue"],
+			"pinia": ["../../../../frappe/node_modules/pinia"]
+		},
+		"typeRoots": []
+	},
+	"include": ["ksa_pos/**/*.ts", "ksa_pos.bundle.ts"]
+}

@@ -1,0 +1,192 @@
+.order-card {
+	display: flex;
+	flex-direction: column;
+	block-size: 236px;
+	overflow: hidden;
+	padding: 0;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-l);
+	background: var(--surface);
+	text-align: start;
+	transition:
+		transform var(--dur) var(--ease),
+		box-shadow var(--dur) var(--ease),
+		border-color var(--dur) var(--ease);
+}
+
+.order-card:hover {
+	transform: translateY(-2px);
+	border-color: var(--line-strong);
+	box-shadow: var(--shadow-2);
+}
+
+.order-card.is-active {
+	border-color: var(--accent);
+	box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.order-card.is-busy {
+	color: inherit !important;
+	opacity: 0.7;
+}
+
+.order-card.is-busy > * {
+	visibility: visible;
+}
+
+.order-card__head {
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+	gap: var(--space-2);
+	padding: var(--space-3) var(--space-4) var(--space-2);
+}
+
+.order-card__number {
+	font-weight: 500;
+	font-size: var(--text-m);
+}
+
+.order-card__date {
+	margin-inline-start: auto;
+	color: var(--ink-faint);
+	font-size: var(--text-xs);
+}
+
+.order-card__items {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	flex: 1;
+	min-block-size: 0;
+	padding-inline: var(--space-4);
+	font-size: var(--text-s);
+}
+
+.order-card__items li {
+	display: flex;
+	gap: var(--space-2);
+	min-inline-size: 0;
+}
+
+.order-card__qty {
+	flex: none;
+	min-inline-size: 30px;
+	color: var(--ink-faint);
+}
+
+.order-card__item-name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.order-card__dims {
+	flex: none;
+	color: var(--ink-faint);
+	font-size: var(--text-xs);
+}
+
+.order-card__more {
+	color: var(--ink-faint);
+	font-size: var(--text-xs);
+}
+
+.order-card__money {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	border-block-start: 1px dashed var(--line);
+	background: var(--surface-sunken);
+}
+
+.order-card__money > span {
+	display: flex;
+	flex-direction: column;
+	padding: var(--space-2) var(--space-4);
+	font-size: var(--text-s);
+	font-weight: 500;
+}
+
+.order-card__money > span + span {
+	border-inline-start: 1px dashed var(--line);
+}
+
+.order-card__money small {
+	color: var(--ink-faint);
+	font-size: var(--text-2xs);
+	font-weight: 400;
+}
+
+.order-card__money .is-due {
+	color: var(--danger);
+}
+
+.order-card__money .is-settled {
+	color: var(--paid);
+}
+
+.order-card__money .is-refund {
+	color: var(--supplier);
+}
+
+/* ---------- three-stage status track: done = solid, part = tread stripes, pending = neutral */
+.status-track {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 3px;
+	padding: var(--space-2) var(--space-2) 0;
+}
+
+.status-track__stage {
+	--hue: var(--pending-ink);
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	min-block-size: 32px;
+	padding: var(--space-1) var(--space-2);
+	overflow: hidden;
+	border-radius: var(--radius-s);
+	background: var(--pending);
+	color: var(--pending-ink);
+	font-size: var(--text-2xs);
+	font-weight: 600;
+	line-height: 1.15;
+	text-align: center;
+}
+
+.status-track__stage--payment {
+	--hue: var(--paid);
+	--soft: var(--paid-soft);
+}
+
+.status-track__stage--invoice {
+	--hue: var(--invoiced);
+	--soft: var(--invoiced-soft);
+}
+
+.status-track__stage--delivery {
+	--hue: var(--delivered);
+	--soft: var(--delivered-soft);
+}
+
+.status-track__stage.is-done {
+	background: var(--hue);
+	color: var(--surface);
+}
+
+.status-track__stage.is-part {
+	background:
+		repeating-linear-gradient(135deg, transparent 0 6px, color-mix(in srgb, var(--hue) 16%, transparent) 6px 9px),
+		linear-gradient(to var(--progress-side, right), var(--soft) var(--progress, 50%), var(--pending) var(--progress, 50%));
+	color: var(--hue);
+}
+
+[dir="rtl"] .status-track__stage.is-part {
+	--progress-side: left;
+}
+
+.status-track__stage span {
+	position: relative;
+}

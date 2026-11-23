@@ -11,15 +11,28 @@ app_license = "mit"
 # required_apps = []
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "ksa_retail",
-# 		"logo": "/assets/ksa_retail/logo.png",
-# 		"title": "Ksa Retail",
-# 		"route": "/ksa_retail",
-# 		"has_permission": "ksa_retail.api.permission.has_app_permission"
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": "ksa_retail",
+		"logo": "/assets/ksa_retail/images/pos-mark.svg",
+		"title": "KSA Retail POS",
+		"route": "/ksa-pos",
+		"has_permission": "ksa_retail.pos.permissions.has_app_permission",
+	}
+]
+
+website_route_rules = [{"from_route": "/ksa-pos", "to_route": "ksa_pos"}]
+
+doc_events = {
+	"Sales Invoice": {"before_validate": "ksa_retail.pos.doc_events.sales_invoice_before_validate"},
+	"Purchase Invoice": {"before_validate": "ksa_retail.pos.doc_events.purchase_invoice_before_validate"},
+	# a new / changed Inventory Dimension gets its field on Sales Order lines too
+	"Inventory Dimension": {"on_update": "ksa_retail.setup.install.after_migrate"},
+}
+
+# POS setup: dimension fields on Sales Order Item + idempotency fields
+after_install = "ksa_retail.setup.install.after_migrate"
+after_migrate = "ksa_retail.setup.install.after_migrate"
 
 # Includes in <head>
 # ------------------
@@ -263,4 +276,3 @@ app_license = "mit"
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-

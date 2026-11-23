@@ -1,0 +1,33 @@
+/** Stroke icons on a 24px grid (static, trusted markup). */
+export const ICONS = {
+	search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+	plus: '<path d="M12 5v14M5 12h14"/>',
+	minus: '<path d="M5 12h14"/>',
+	close: '<path d="M6 6l12 12M18 6 6 18"/>',
+	trash: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
+	truck: '<path d="M2 6h11v10H2zM13 9h4l4 4v3h-8"/><circle cx="6" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/>',
+	invoice: '<path d="M6 2h9l4 4v16l-3-2-2 2-2-2-2 2-2-2-2 2z"/><path d="M9 9h6M9 13h6"/>',
+	print: '<path d="M6 9V3h12v6M6 18H4v-7h16v7h-2"/><path d="M7 14h10v7H7z"/>',
+	check: '<path d="m5 12 5 5L20 7"/>',
+	clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+	sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+	moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+	desk: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+	card: '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>',
+	globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/>',
+	logout: '<path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/>',
+	chevron: '<path d="m6 9 6 6 6-6"/>',
+	warehouse: '<path d="M3 9l9-5 9 5v11H3z"/><path d="M8 20v-7h8v7"/>',
+	info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
+	done: '<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+	edit: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/>',
+	alert: '<path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17h.01"/>',
+	undo: '<path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/>',
+	userPlus: '<circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6.5 7-6.5s7 2.5 7 6.5M19 8v6M16 11h6"/>',
+	link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+	cartAdd: '<path d="M3 4h2l2.2 10.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.4-1.1L21 8H6.2"/><circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/><path d="M13 9.5v4M11 11.5h4"/>',
+	refresh: '<path d="M20 11a8 8 0 0 0-14.6-4.5L4 8"/><path d="M4 4v4h4"/><path d="M4 13a8 8 0 0 0 14.6 4.5L20 16"/><path d="M20 20v-4h-4"/>',
+	box: '<path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/>',
+} as const;
+
+export type IconName = keyof typeof ICONS;

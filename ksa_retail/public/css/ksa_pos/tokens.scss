@@ -1,0 +1,181 @@
+/*
+ * KSA Retail POS: design tokens.
+ * Layout concept: a dark asphalt command bar (brand + customer search) over two working
+ * surfaces: the workspace (customer, orders, products) and the ticket (checkout).
+ * Signal amber is the single action color; statuses use their own hues.
+ */
+:root {
+	color-scheme: light;
+
+	/* type */
+	--font-display: "Readex Pro", "IBM Plex Sans Arabic", system-ui, sans-serif;
+	--font-body: "IBM Plex Sans Arabic", "Readex Pro", system-ui, sans-serif;
+	--font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+	--text-2xs: 11px;
+	--text-xs: 12px;
+	--text-s: 13px;
+	--text-m: 14px;
+	--text-l: 16px;
+	--text-xl: 19px;
+	--text-2xl: 24px;
+	--leading: 1.5;
+
+	/* space (4px grid) */
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 12px;
+	--space-4: 16px;
+	--space-5: 20px;
+	--space-6: 24px;
+	--space-8: 32px;
+
+	/* shape */
+	--radius-s: 6px;
+	--radius-m: 10px;
+	--radius-l: 14px;
+	--radius-xl: 18px;
+	--radius-pill: 999px;
+
+	/* sizes */
+	--control-h: 40px;
+	--control-h-s: 32px;
+	--control-h-xs: 28px;
+	--topbar-h: 68px;
+	--ticket-w: 440px;
+	--card-min: 300px;
+	--product-min: 290px;
+
+	/* layers */
+	--z-sticky: 10;
+	--z-popover: 40;
+	--z-dialog: 60;
+	--z-toast: 80;
+
+	/* motion */
+	--ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+	--dur-fast: 120ms;
+	--dur: 200ms;
+
+	/* color: neutrals with a slight steel-blue bias */
+	--canvas: #e9edf1;
+	--surface: #ffffff;
+	--surface-sunken: #f3f5f8;
+	--surface-hover: #f7f9fb;
+	--ink: #111820;
+	--ink-muted: #4f5a69;
+	--ink-faint: #8792a1;
+	--line: #dbe1e8;
+	--line-strong: #c2cbd6;
+
+	/* the command bar stays dark in both themes */
+	--chrome: #141920;
+	--chrome-raised: #1f2630;
+	--chrome-ink: #f1f4f7;
+	--chrome-muted: #9aa5b4;
+	--chrome-line: #2b3440;
+
+	/* signal amber: the one action color */
+	--accent: #f2a516;
+	--accent-strong: #b97400;
+	--accent-ink: #1b1302;
+	--accent-soft: #fdf0d4;
+	--focus: #2f6fe4;
+
+	/* status hues (separate from the accent) */
+	--paid: #138a5b;
+	--paid-soft: #dbf1e7;
+	--invoiced: #3f56d4;
+	--invoiced-soft: #e3e7fb;
+	--delivered: #0e7a8a;
+	--delivered-soft: #dcf0f2;
+	--pending: #e6e9ee;
+	--pending-ink: #6c7686;
+	--danger: #c5303a;
+	--danger-soft: #fbe4e5;
+	--warning: #a76300;
+	--warning-soft: #fdf0dc;
+	--supplier: #7b4fc4;
+	--supplier-soft: #efe7fb;
+
+	/* elevation */
+	--shadow-1: 0 1px 2px rgb(17 24 32 / 0.06), 0 1px 1px rgb(17 24 32 / 0.04);
+	--shadow-2: 0 2px 4px rgb(17 24 32 / 0.05), 0 10px 24px -12px rgb(17 24 32 / 0.18);
+	--shadow-pop: 0 18px 50px -16px rgb(17 24 32 / 0.38), 0 2px 6px rgb(17 24 32 / 0.08);
+	--glow: 0 0 22px rgb(242 165 22 / 0.55);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		color-scheme: dark;
+		--canvas: #0b0e12;
+		--surface: #141920;
+		--surface-sunken: #10141a;
+		--surface-hover: #1a2029;
+		--ink: #e9edf2;
+		--ink-muted: #a3adbb;
+		--ink-faint: #6e7889;
+		--line: #242b35;
+		--line-strong: #333d4a;
+		--chrome: #07090c;
+		--chrome-raised: #141920;
+		--chrome-line: #1d232c;
+		--accent: #f5b12e;
+		--accent-strong: #f5b12e;
+		--accent-soft: #33260d;
+		--focus: #6f9cf5;
+		--paid: #3fc28d;
+		--paid-soft: #12301f;
+		--invoiced: #8296f5;
+		--invoiced-soft: #1d2343;
+		--delivered: #43b8c7;
+		--delivered-soft: #10292d;
+		--pending: #1d232c;
+		--pending-ink: #7a8494;
+		--danger: #f0727a;
+		--danger-soft: #3a1a1d;
+		--warning: #f0a347;
+		--warning-soft: #33240f;
+		--supplier: #b08ef0;
+		--supplier-soft: #271d3c;
+		--shadow-1: 0 1px 2px rgb(0 0 0 / 0.4);
+		--shadow-2: 0 2px 4px rgb(0 0 0 / 0.35), 0 12px 28px -14px rgb(0 0 0 / 0.7);
+		--shadow-pop: 0 22px 60px -18px rgb(0 0 0 / 0.85);
+	}
+}
+
+:root[data-theme="dark"] {
+	color-scheme: dark;
+	--canvas: #0b0e12;
+	--surface: #141920;
+	--surface-sunken: #10141a;
+	--surface-hover: #1a2029;
+	--ink: #e9edf2;
+	--ink-muted: #a3adbb;
+	--ink-faint: #6e7889;
+	--line: #242b35;
+	--line-strong: #333d4a;
+	--chrome: #07090c;
+	--chrome-raised: #141920;
+	--chrome-line: #1d232c;
+	--accent: #f5b12e;
+	--accent-strong: #f5b12e;
+	--accent-soft: #33260d;
+	--focus: #6f9cf5;
+	--paid: #3fc28d;
+	--paid-soft: #12301f;
+	--invoiced: #8296f5;
+	--invoiced-soft: #1d2343;
+	--delivered: #43b8c7;
+	--delivered-soft: #10292d;
+	--pending: #1d232c;
+	--pending-ink: #7a8494;
+	--danger: #f0727a;
+	--danger-soft: #3a1a1d;
+	--warning: #f0a347;
+	--warning-soft: #33240f;
+	--supplier: #b08ef0;
+	--supplier-soft: #271d3c;
+	--shadow-1: 0 1px 2px rgb(0 0 0 / 0.4);
+	--shadow-2: 0 2px 4px rgb(0 0 0 / 0.35), 0 12px 28px -14px rgb(0 0 0 / 0.7);
+	--shadow-pop: 0 22px 60px -18px rgb(0 0 0 / 0.85);
+}

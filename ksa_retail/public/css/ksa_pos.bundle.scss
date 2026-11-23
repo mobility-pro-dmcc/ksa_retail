@@ -1,0 +1,10 @@
+// KSA Retail POS: built by `bench build --app ksa_retail`. One file per concern.
+@import "./ksa_pos/tokens";
+@import "./ksa_pos/base";
+@import "./ksa_pos/controls";
+@import "./ksa_pos/layout";
+@import "./ksa_pos/customer";
+@import "./ksa_pos/orders";
+@import "./ksa_pos/catalog";
+@import "./ksa_pos/checkout";
+@import "./ksa_pos/dialogs";

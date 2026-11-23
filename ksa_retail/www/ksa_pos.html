@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{ pos_lang }}" dir="{{ pos_dir }}"{% if pos_theme %} data-theme="{{ pos_theme }}"{% endif %}>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<meta name="color-scheme" content="light dark">
+	<title>KSA Retail POS</title>
+	<link rel="icon" href="/assets/ksa_retail/images/pos-mark.svg">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@400;500;600;700&display=swap">
+	<link rel="stylesheet" href="{{ css_url }}">
+</head>
+<body>
+	<div id="ksa-pos"></div>
+	<noscript>KSA Retail POS needs JavaScript.</noscript>
+	<script>window.KSA_POS_BOOT = {{ boot_json }};</script>
+	<script src="{{ js_url }}"></script>
+</body>
+</html>

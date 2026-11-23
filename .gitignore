@@ -5,3 +5,6 @@
 tags
 node_modules
 __pycache__
+
+# build output of `bench build --app ksa_retail`
+ksa_retail/public/dist/
