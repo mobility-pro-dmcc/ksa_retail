@@ -27,12 +27,12 @@ doc_events = {
 	"Sales Invoice": {"before_validate": "ksa_retail.pos.doc_events.sales_invoice_before_validate"},
 	"Purchase Invoice": {"before_validate": "ksa_retail.pos.doc_events.purchase_invoice_before_validate"},
 	# a new / changed Inventory Dimension gets its field on Sales Order lines too
-	"Inventory Dimension": {"on_update": "ksa_retail.setup.install.after_migrate"},
+	"Inventory Dimension": {"on_update": "ksa_retail.setup.install.on_inventory_dimension_update"},
 }
 
-# POS setup: dimension fields on Sales Order Item + idempotency fields
-after_install = "ksa_retail.setup.install.after_migrate"
-after_migrate = "ksa_retail.setup.install.after_migrate"
+# POS custom fields come from patches/v1_0/add_pos_custom_fields.py.
+# Patches are skipped on a fresh install, so create them there too.
+after_install = "ksa_retail.setup.install.after_install"
 
 # Includes in <head>
 # ------------------
@@ -276,3 +276,18 @@ after_migrate = "ksa_retail.setup.install.after_migrate"
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
+
+# --- mobility_customizations: customization installer (auto-generated) ---
+# Applies customizations/install and customizations/updates without needing mobility_customizations.
+# Keep this block at the end of the file.
+def _add_customization_installer_hook(name, method):
+	value = globals().get(name) or []
+	value = [value] if isinstance(value, str) else list(value)
+	if method not in value:
+		value.append(method)
+	globals()[name] = value
+
+
+_add_customization_installer_hook("after_install", "ksa_retail.customizations.installer.after_install")
+_add_customization_installer_hook("after_migrate", "ksa_retail.customizations.installer.after_migrate")
+# --- end mobility_customizations customization installer ---

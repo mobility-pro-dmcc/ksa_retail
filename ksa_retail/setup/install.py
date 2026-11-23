@@ -1,6 +1,8 @@
 """Schema setup for the KSA Retail POS.
 
-Runs after install and after every migrate, so it is idempotent.
+Applied by the patch `ksa_retail.patches.v1_0.add_pos_custom_fields`, on
+fresh install (patches are skipped there) and whenever an Inventory Dimension
+is saved. Idempotent.
 
 1. Inventory Dimensions (e.g. "Production Year") are only added by ERPNext to
    stock transactions. The POS records the chosen dimension value on the
@@ -14,7 +16,15 @@ import frappe
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 
 
-def after_migrate(*args, **kwargs):
+def after_install(*args, **kwargs):
+	setup_custom_fields()
+
+
+def on_inventory_dimension_update(doc=None, method=None):
+	setup_custom_fields()
+
+
+def setup_custom_fields():
 	if "erpnext" not in frappe.get_installed_apps():
 		return
 

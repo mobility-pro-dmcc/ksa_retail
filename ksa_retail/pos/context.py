@@ -2,6 +2,10 @@
 
 Resolved once per request, in this order: the user's POS Profile (ERPNext standard),
 then user defaults, then Global / Stock / Selling defaults.
+
+Settings fields differ between ERPNext versions (v16 dropped Stock Settings
+`default_warehouse`), so settings are read through `_setting`, which treats a
+missing field as "not set" instead of failing.
 """
 
 import frappe
@@ -39,7 +43,7 @@ def payment_mode(name: str) -> dict:
 def require_warehouse() -> str:
 	warehouse = get_context().warehouse
 	if not warehouse:
-		frappe.throw(_("Set a default warehouse (POS Profile or Stock Settings) before selling."))
+		frappe.throw(_("No warehouse is available to you. Set one in your POS Profile or user defaults, or ask for warehouse permission."))
 	return warehouse
 
 
@@ -53,7 +57,7 @@ def _resolve(user: str) -> frappe._dict:
 		warehouse=_warehouse(profile, warehouses),
 		warehouses=warehouses,
 		price_list=(profile and profile.selling_price_list)
-		or frappe.db.get_single_value("Selling Settings", "selling_price_list"),
+		or _setting("Selling Settings", "selling_price_list"),
 		tax_template=(profile and profile.taxes_and_charges)
 		or frappe.db.get_value(
 			"Sales Taxes and Charges Template", {"company": company, "is_default": 1, "disabled": 0}, "name"
@@ -61,6 +65,13 @@ def _resolve(user: str) -> frappe._dict:
 		pos_profile=profile and profile.name,
 		payment_modes=_payment_modes(company, profile),
 	)
+
+
+def _setting(doctype: str, fieldname: str):
+	"""A Single DocType value, or None when this version has no such field."""
+	if not frappe.get_meta(doctype).has_field(fieldname):
+		return None
+	return frappe.db.get_single_value(doctype, fieldname)
 
 
 def _pos_profile(user: str):
@@ -80,7 +91,7 @@ def _company(profile) -> str:
 	company = (
 		(profile and profile.company)
 		or frappe.defaults.get_user_default("Company")
-		or frappe.db.get_single_value("Global Defaults", "default_company")
+		or _setting("Global Defaults", "default_company")
 	)
 	if not company:
 		companies = frappe.get_list("Company", pluck="name", limit_page_length=1)
@@ -110,7 +121,7 @@ def _warehouse(profile, permitted: list[str]) -> str | None:
 		frappe.defaults.get_user_default("ksa_pos_warehouse"),
 		profile and profile.warehouse,
 		frappe.defaults.get_user_default("Warehouse"),
-		frappe.db.get_single_value("Stock Settings", "default_warehouse"),
+		_setting("Stock Settings", "default_warehouse"),  # gone in v16
 	]
 	for warehouse in candidates:
 		if warehouse in allowed:

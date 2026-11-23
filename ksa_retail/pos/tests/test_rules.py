@@ -113,3 +113,23 @@ class TestInputs(unittest.TestCase):
 
 	def test_dimension_key_normalises_empty_values(self):
 		self.assertEqual(dimensions.key([None, "2025", ""]), ("", "2025", ""))
+
+
+class TestVersionSafeSettings(unittest.TestCase):
+	"""ERPNext v16 has no Stock Settings `default_warehouse`; the context must not fail."""
+
+	def test_missing_settings_field_reads_as_none(self):
+		from ksa_retail.pos import context
+
+		self.assertIsNone(context._setting("Stock Settings", "no_such_field_in_any_version"))
+
+	def test_warehouse_falls_back_to_permitted(self):
+		from unittest import mock
+
+		from ksa_retail.pos import context
+
+		with mock.patch.object(context, "_setting", return_value=None), mock.patch.object(
+			frappe.defaults, "get_user_default", return_value=None
+		):
+			self.assertEqual(context._warehouse(None, ["WH-B", "WH-A"]), "WH-B")
+			self.assertIsNone(context._warehouse(None, []))
